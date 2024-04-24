@@ -15,10 +15,10 @@ jobs:
           token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Check deps
         run: |
-         - node --version
-         - genezio --version
-         - which genezio
-         - which node
+          node --version
+          genezio --version
+          which genezio
+          which node
 
       - name: Deploy backend
         working-directory: ./server
