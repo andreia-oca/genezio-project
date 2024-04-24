@@ -25,6 +25,11 @@ jobs:
         if: steps.cache-genezio.outputs.cache-hit != 'true'
         with:
           token: ${{ secrets.GENEZIO_TOKEN }}
+      - name: Debug Cache Restoration
+        run: |
+          ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/
+          ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
+
       - name: Check deps
         run: |
           node --version
