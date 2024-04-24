@@ -13,15 +13,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      # Cache Genezio binary
       - name: Cache Genezio binary
+        id: cache-genezio
         uses: actions/cache@v4
         with:
           path: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
-          key: ${{ runner.os }}-genezio-binary-${{ hashFiles('/opt/hostedtoolcache/node/20.12.2/x64/bin/genezio') }}
+          key: ${{ runner.os }}-genezio-binary
           restore-keys: |
-            ${{ runner.os }}-genezio-binary-
+            ${{ runner.os }}-genezio-binary
       - uses: Genez-io/genezio-github-action@v1
+        if: steps.cache-genezio.outputs.cache-hit != 'true'
         with:
           token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Check deps
