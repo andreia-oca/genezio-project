@@ -14,21 +14,13 @@ jobs:
         with:
           node-version: 20
       - name: Cache Genezio binary
-        id: cache-npm-packages
-        uses: actions/cache@v4
-        with:
-          path: ~/.npm
-          key: ${{ runner.os }}-npm-packages
-          restore-keys: |
-            ${{ runner.os }}-npm-packages
-      - name: Cache Genezio binary
         id: cache-genezio
         uses: actions/cache@v4
         with:
-          path: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
-          key: ${{ runner.os }}-genezio-binary
+          path: /opt/hostedtoolcache/node/20.12.2/x64/
+          key: ${{ runner.os }}-npm-binaries
           restore-keys: |
-            ${{ runner.os }}-genezio-binary
+            ${{ runner.os }}-npm-binaries
       - uses: Genez-io/genezio-github-action@v1
         if: steps.cache-genezio.outputs.cache-hit != 'true'
         with:
