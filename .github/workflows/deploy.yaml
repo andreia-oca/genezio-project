@@ -10,7 +10,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
-      - uses: Genez-io/genezio-github-action@main
+        with:
+          node-version: 20
+      - uses: Genez-io/genezio-github-action@v1
         with:
           token: ${{ secrets.GENEZIO_TOKEN }}
       - name: Check deps
@@ -19,7 +21,5 @@ jobs:
           genezio --version
           which genezio
           which node
-
       - name: Deploy backend
-        working-directory: ./server
         run: genezio deploy
