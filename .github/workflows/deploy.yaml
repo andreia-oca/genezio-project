@@ -14,6 +14,14 @@ jobs:
         with:
           node-version: 20
       - name: Cache Genezio binary
+        id: cache-npm-packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm
+          key: ${{ runner.os }}-npm-packages
+          restore-keys: |
+            ${{ runner.os }}-npm-packages
+      - name: Cache Genezio binary
         id: cache-genezio
         uses: actions/cache@v4
         with:
@@ -31,7 +39,9 @@ jobs:
           ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
       - name: Echo path
         run: echo $PATH
+      - name:
+        run: which genezio
       - name: Check deps
-        run: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio --version
+        run: genezio --version
       - name: Deploy backend
         run: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio deploy
