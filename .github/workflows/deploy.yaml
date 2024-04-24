@@ -13,8 +13,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Cache Genezio binary
-        id: cache-genezio
+      - name: Cache npm binaries
+        id: cache-npm-binaries
         uses: actions/cache@v4
         with:
           path: /opt/hostedtoolcache/node/20.12.2/x64/
@@ -22,19 +22,10 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-npm-binaries
       - uses: Genez-io/genezio-github-action@v1
-        if: steps.cache-genezio.outputs.cache-hit != 'true'
-        with:
-          token: ${{ secrets.GENEZIO_TOKEN }}
-      - name: Debug Cache Restoration
-        run: |
-          ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/
-          ls -l /opt/hostedtoolcache/node/20.12.2/x64//lib/node_modules/genezio/
-          ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
-      - name: Echo path
-        run: echo $PATH
-      - name:
-        run: which genezio
-      - name: Check deps
+        if: steps.cache-npm-binaries.outputs.cache-hit != 'true'
+      - name: Check genezio version - this step is optional
         run: genezio --version
+      - name: Login with genezio - this step is required because we don't cache the genezio auth file
+        run: genezio login ${{ secrets.GENEZIO_TOKEN }}
       - name: Deploy backend
-        run: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio deploy
+        run: genezio deploy
