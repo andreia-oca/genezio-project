@@ -29,10 +29,9 @@ jobs:
         run: |
           ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/
           ls -l /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio
-
+      - name: Echo path
+        run: echo $PATH
       - name: Check deps
-        run: |
-          node --version
-          /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio --version
+        run: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio --version
       - name: Deploy backend
         run: /opt/hostedtoolcache/node/20.12.2/x64/bin/genezio deploy
