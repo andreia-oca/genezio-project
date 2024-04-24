@@ -1,0 +1,25 @@
+name: deploy
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy-backend:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+      - uses: Genez-io/genezio-github-action@main
+        with:
+          token: ${{ secrets.GENEZIO_TOKEN }}
+      - name: Check deps
+        run: |
+         - node --version
+         - genezio --version
+         - which genezio
+         - which node
+
+      - name: Deploy backend
+        working-directory: ./server
+        run: genezio deploy
