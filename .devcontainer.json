@@ -5,5 +5,15 @@
 
     "secrets": {
         "GENEZIO_LOGIN_TOKEN": {}
-      }
+    },
+
+    "forwardPorts": [8083, 5173],
+
+    "customizations": {
+        "vscode": {
+            "settings": {
+                "workbench.colorTheme": "Default Dark+"
+            }
+        }
+    }
 }
