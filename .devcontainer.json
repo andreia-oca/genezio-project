@@ -1,0 +1,9 @@
+{
+	"name": "genezio",
+	"context": ".",
+	"dockerFile": "Dockerfile",
+
+    "secrets": {
+        "GENEZIO_LOGIN_TOKEN": {}
+      }
+}
