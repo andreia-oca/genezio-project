@@ -15,5 +15,7 @@
                 "workbench.colorTheme": "Default Dark+"
             }
         }
-    }
+    },
+
+    "postCreateCommand": "if [ -n \"$GENEZIO_LOGIN_TOKEN\" ]; then  genezio login $GENEZIO_LOGIN_TOKEN; fi"
 }
